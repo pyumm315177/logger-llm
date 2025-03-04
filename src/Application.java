@@ -16,7 +16,7 @@ public class Application {
           "Create thumbnail images for '%s'.".formatted(aiResult)
         );
 //        System.out.println(imageResult);
-        slack.sendMessage(imageResult);
+        slack.sendMessage(aiResult, imageResult);
         // 추론 모델 만들기
 
 //        System.out.println(aiResult);

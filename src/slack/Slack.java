@@ -21,19 +21,34 @@ public class Slack {
         webClient = WebClient.getWebClient();
     }
 
-    public void sendMessage(String msg) throws NoEnvException {
+    private void handleRequest(String body) throws NoEnvException {
         String result = "";
         HashMap<String,String> map = new HashMap<>();
         map.put("url", secret.getSecret(SecretCategory.SLACK_BOT_URL.key));
         map.put("method", "POST");
-        map.put("body", """
-                {"text": "%s"}
-                """.formatted(msg));
+        map.put("body", body);
         try {
             result = webClient.sendRequest( webClient.makeRequest(map));
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
         logger.info(result);
+    }
+
+    public void sendMessage(String msg, String imageUrl) throws NoEnvException {
+        handleRequest("""
+                {
+                 "text": "%s",
+                 "attachments": [{
+                    "image_url": "%s"
+                 }]
+                }
+                """.formatted(msg, imageUrl));
+    }
+
+    public void sendMessage(String msg) throws NoEnvException {
+        handleRequest("""
+                {"text": "%s"}
+                """.formatted(msg));
     }
 }
