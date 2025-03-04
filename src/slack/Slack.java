@@ -15,8 +15,8 @@ public class Slack {
     private final MySecret secret;
     public Slack() throws NoEnvException {
         logger = MyLogger.getLogger();
-//        logger.setLevel(MyLoggerLevel.DEBUG);
-        logger.setLevel(MyLoggerLevel.INFO);
+        logger.setLevel(MyLoggerLevel.DEBUG);
+//        logger.setLevel(MyLoggerLevel.INFO);
         secret = MySecret.getSecret();
         webClient = WebClient.getWebClient();
     }
