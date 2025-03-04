@@ -50,7 +50,7 @@ public class Application {
         );
         Future<String> reasoningFuture2 = executor.submit((Callable<String>) reasoningTask2);
 
-        // 두 작업의 결과를 받아옴
+        // 모든 작업의 결과를 받아옴
         String imageResult = imageFuture.get();
         String reasoningResult = reasoningFuture.get();
         String reasoningResult2 = reasoningFuture2.get();
