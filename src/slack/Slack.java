@@ -29,7 +29,6 @@ public class Slack {
         map.put("body", """
                 {"text": "%s"}
                 """.formatted(msg));
-        map.put("headers", "");
         try {
             result = webClient.sendRequest( webClient.makeRequest(map));
         } catch (Exception e) {

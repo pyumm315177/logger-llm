@@ -37,11 +37,13 @@ public class WebClient implements IWebClient {
     @Override
     public HttpRequest makeRequest(Map<String, String> map) {
         logger.debug("Request 객체 생성 시도");
-        return HttpRequest.newBuilder()
+        HttpRequest.Builder builder = HttpRequest.newBuilder()
                 .uri(URI.create(map.get("url")))
-                .method(map.get("method"), HttpRequest.BodyPublishers.ofString(map.get("body")))
-//                .headers(map.get("headers").split(";"))
-                .build();
+                .method(map.get("method"), HttpRequest.BodyPublishers.ofString(map.get("body")));
+        if (map.containsKey("headers")) {
+            builder = builder.headers(map.get("headers").split(";"));
+        }
+        return builder.build();
     }
 }
 

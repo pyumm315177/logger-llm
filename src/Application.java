@@ -1,3 +1,4 @@
+import llm.LLM;
 import slack.Slack;
 import util.logger.MyLogger;
 import util.logger.MyLoggerLevel;
@@ -12,15 +13,11 @@ import java.util.Map;
 import java.util.Timer;
 
 public class Application {
-    public static void main(String[] args) throws NoEnvException, InterruptedException {
+    public static void main(String[] args) throws NoEnvException, InterruptedException, IOException {
+        LLM llm = new LLM();
+        String aiResult = llm.sendPrompt("meta-llama/Llama-3.3-70B-Instruct-Turbo-Free", "What is Java? No markdown, No escape character, nut shell");
+//        System.out.println(aiResult);
         Slack slack = new Slack();
-        for (int i = 0; i < 100; i++) {
-            Thread.sleep(1000);
-            slack.sendMessage("안녕안녕 나는 슬랙이야");
-            Thread.sleep(1000);
-            slack.sendMessage("헬륨가스 마시고");
-            Thread.sleep(1000);
-            slack.sendMessage("요를레이히~");
-        }
+        slack.sendMessage(aiResult);
     }
 }
